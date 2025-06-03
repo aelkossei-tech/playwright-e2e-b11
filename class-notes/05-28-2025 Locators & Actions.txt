@@ -1,0 +1,25 @@
+** INTERVIEW QUESTION: What is something you've contributed in your previous company? **
+    - Seeing that there's a need for test-ids in my previous company, I took the initiative to ask the development team to include
+      test-ids within their source code to create a faster, more efficient testing workflow --> eventually they created a company policy 
+      becuase of it 
+
+
+XPath* --> //button[@id='register_button'] ==> another way of locating elements + you can locate to parent (unlike CSS)
+    1. Find all buttons
+    2. Filter the buttons which has id attribute 
+    3. Filter the id equals register_button
+
+CSS --> button[id='register_button']
+    1. Find the id which is register_button
+
+//tagName[@attribute="value"] (XPath)  === tagName[attribute="value"] (CSS)
+
+CSS                                 XPath
+tagName[attribute^="value"]; === // button[starts-with(@id, 'register)]
+tagName[attribute*="value"]; === // button[contains(@id, 'register)]
+tagName[attribute$="value"]; === // button[ends-with(@id, 'register)]
+
+Playwright supports XPath
+Cypress DOES NOT support XPath (but there is a dependency)
+Selenium supports XPath
+They ALL support CSS and have their own locators 

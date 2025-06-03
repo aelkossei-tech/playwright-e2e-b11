@@ -1,0 +1,59 @@
+1. page.getByRole*() --> locate by explicit and implicit accessibilty attributes
+    - mostly use this for buttons, links, and headings
+    - EX: <button>Click Me</button> 
+          page.getByRole('button', { name: 'Click Me'}); 
+
+          <a href=" ">About</a> 
+          page.getByRole('link', { name: 'About'}); 
+
+          <h1 id="main_heading">HTML Elements</h1>
+           page.getByRole('heading', { name: 'HTML Elements'}); 
+
+2. page.getByText() --> to locate by text content 
+    - buttons, links, headings, paragraphs (p)
+        - EX: <button>Click Me</button> 
+          page.getByText('Click Me'); 
+
+          <a href=" ">About</a> 
+          page.getByText('About'); 
+
+          <h1 id="main_heading">HTML Elements</h1>
+           page.getByText('HTML Elements'); 
+
+
+3. page.getByLabel() --> to locate a form control by associated label's text. 
+    - mostly used for inputs fields
+
+4. page.getByPlaceholder() --> to locate an input by placeholder
+    - also mostly used for inputs fields 
+        - EX: <input type="text", name="email" id="email" placeholder="Email or phone number">
+          page.getByPlaceholder('Email or phone number'); 
+
+5. page.getByAltText() --> to locate an element, usually image, by its text alternative.
+    - EX: <img alt ="Facebook">">
+          page.getByAltText('Facebook'); 
+                    OR 
+          page.locator('[alt="Facebook"]'); 
+
+6. page.getByTitle() --> to locate an element by its title attribute
+    - usally paragraphs, links, headings, labels 
+        - EX: <img title ="Facebook">">
+          page.getByTitle('Facebook'); 
+                    OR 
+          page.locator('[title="Facebook"]'); 
+
+
+7. page.getByTestId()* --> to locate an element based on its data-testid attribute 
+        - EX: <input type="text", name="email" id="email" data-testid="royal-email" placeholder="Email or phone number">
+          page.getByTestId('royal-email'); 
+
+
+WHAT TO USE: 
+    - CSS --> locator()
+    - test-id --> page.getByTestId()
+    - role --> page.getByRole()
+
+
+Custom Pseudo-Classes: 
+    - :text("text") and :has-text("text") --> pseudo-class matches elements based on their text content 
+    

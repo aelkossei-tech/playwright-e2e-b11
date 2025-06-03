@@ -1,0 +1,65 @@
+- Playwright ==> open-source automation framework developed by Microsoft for E2E testing of web applications 
+    - can work in major browsers: Chrome + Firefox + Safari 
+    - in both headless/headed modes in single API
+    - it's designed to --> enable cross-browser [unlike Cypress] web automation that is up-to-date/reliable/fast 
+    - unlike Cypress AGAIN --> supports several programming languages: JavaScript + TypeScript + Python + C# + Java 
+    - also offers mobile browser emulation (pretends to be a phone or mobile device to emulate that environment) 
+        + network interception (let's you control what your website sends/receives) 
+        + robust handling of asynchronous web elements (better handling than Cypress)
+
+- Playwright Core Features: 
+    - It has more capabilites than Cypress --> in that it does cross-browser actions + cross-platform (Windows/Linux/Mac/locally on CI/headless or headed)
+    - Also has an auto-wait feature + has specific assertions created for the dynamic web 
+    - Playwright can test scenarios in MULTIPLE TABS with MULTIPLE ORIGINS and MULTIPLE USERS --> can run them all in one test 
+    - Uses a real-browser input pipeline that mimics the real user so well 
+    - can also pierce Shadow DOM elements --> don't need to take extra steps to find them [like Cypress]
+    - When testing --> Playwright creates a browser context for each test 
+        - browser context === brand-new browser profile --> b/c of this it fully isolates the test without any overhead 
+    - can save the authentication state --> you don't need to log-in multiple times 
+    - has powerful tools like: 
+        - Codegen ==> generates tests by recording your actions [saves them into any language]
+        - Playwright Inspector ==> this tool inspects the page + generates selectors + steps through test execution + sees/identifies click points + explores execiton logs
+            - it seems like it really goes over your tests and helps you find things in the process 
+            - helps with interactive debugging 
+        - Trace Viewer ==> captures all the info to investigate when a test fails 
+    - Playwright can run multiple tests at the same time --> reduces test time 
+    - provides multiple ways to report tests [HTML, JSON, JUnit]
+    - Microsoft constantly updates Playwright --> so always has new features to address certain bugs/issues 
+
+- Playwright Advantages (Compared to Other Testing Frameworks): 
+    - it's super fast --> b/c of the design/architecture 
+    - supports running tests in parallel by default --> reduces time taken to run large test suites (especially in diff. environments/browsers)
+    - it addresses A LOT of other frameworks' limitations (like iFrames or pop-ups or mutli-tab testing etc.)
+    - it's backed by Microsoft
+
+* Even though Playwright is amazing compared to other testing frameworks ==> it's NOT designed to test mobile/desktop applications OR not suited for API performance testing 
+
+- Playwright Disadvantages: 
+    - Still a small community --> makes it more difficult to connect with others about it & find support/plugins/examples online 
+    - Even though it offers mobile emulation --> doesn't provide real device testing or natice app testing capabilites
+
+- Playwright Architecture: 
+    - WebSocket* ==> communication protocol that allows for two-way + real-time communication between a browser & server, having requests move back and forth without re-connection
+        - because of that --> facilitates immediate data transfer 
+        - Playwright uses a single WebSocket connection --> it's between the client and the server 
+        - SO when you trigger a test --> the code is executed on the CLIENT side + commands are converted to JSON format to the Playwright server using WebSocket
+        - Playwright is built on WebSocket connection ==> makes it unique to other frameworks + makes it faster 
+
+    - Chrome DevTools Protocol (CDP) ==> remote debugging protocol (API) that lets developers communicate w/ a Chrome browser 
+        - they use CDP to inspect the browser's state + control its behavior + collect debugging info. 
+        - Playwright uses these APIs --> interact directly w/ browser components 
+
+    - Playwright operates out-of-process ==> it runs tests outside the browser's process 
+
+
+
+
+
+
+
+** Read Selenium/Cypress/Playwright architecture --> Interview question(s) 
+    - Why .trigger() doesn't work in Cypress --> why didn't they fix it 
+
+- Publish frameworks & have README.md to explain in detail 
+- demoqa.com --> Demo QA tests +  automation panda website  + practicesoftwaretesting website
+- Read up more on Cypress/Playwright, maybe even a little bit of Selenium

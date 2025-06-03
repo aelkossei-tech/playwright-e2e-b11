@@ -1,0 +1,13 @@
+Element States: [NOT for Assertions ]
+    - Visible 
+    - Enabled 
+    - Disabled 
+    - 
+
+** Interview Question : How can you run JS code within your Playwright test? 
+- page.evaluate() method 
+
+* matchers --> another term for Playwright assertions
+    - Negating (not) matchers
+
+- Playwright allows Visual Regression Testing and Snapshot Testing 

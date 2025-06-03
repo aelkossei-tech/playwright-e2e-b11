@@ -1,0 +1,7 @@
+* Mention Playwright Trace Viewer and UI mode when trying to sell that you know Playwright
+
+** Interview Question: What are Hooks and how do you use them? ** 
+    - Hooks are functions that allow you to set up conditons that must take place BEFORE or AFTER your tests or test suites run 
+    - " I use [beforeEach/beforeAll/afterEach/afterAll] to ..." 
+
+
