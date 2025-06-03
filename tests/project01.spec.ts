@@ -52,7 +52,7 @@ test.describe('Playwright Project01 - To-Do List', () => {
         
         for (let i = 0; i < count; i++) {
             await checkIcons.nth(i).click();
-            await expect(taskTexts.nth(i)).toHaveClass('.fa-circle-check.has-text-success'); 
+            await expect(taskTexts.nth(i)).toHaveClass('.panel-icon .has-text-success'); 
         }
 
         await page.locator('#clear').click();
