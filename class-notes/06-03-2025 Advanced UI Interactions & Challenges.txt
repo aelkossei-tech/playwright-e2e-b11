@@ -1,0 +1,86 @@
+1. iFrames: 
+    - Unlike Cypress (where it couldn't handle iframe --> 
+        navigate to iframe 
+        + access the iframe's actual content = .its('0.contentDocument.body')
+        + .then(cy.wrap()) ), Playwright has a convenient way to deal with them
+   
+    - Playwright ==> frameLocator() method --> allows you to create a locator that pierces through the iframes to find the element inside of it
+
+2. Multiple Tabs: 
+    - w/ Cypress ==> Cypress naturally cannot support multiple tabs (only single)
+        - SO, to deal with this --> you would have to use .invoke() and removeAttr
+            - cy.get(‘a[target=“_blank”]).invoke(‘removeAttr’, ‘target’).click();  ==> deletes the attribute 
+   
+    - now w/ Playwright ==> it's a straightforward process
+        - a new tab in Playwright is essentially a new page within the browser context 
+        - Playwright can deal w/ it in 2 ways: 
+            1. using 'context' fixture ==> on Playwright test runner; it represents a browser context + calls .newPage()
+            2. page.context() ==> if there's access to an existing page --> can use page.context().newPage()
+
+3. Multiple Browsers: 
+    - NOW this is where Playwright shines 
+    - Playwright typically handles multiple browsers at the beginning of the test suite OR when you need isolate environments for diff. parts of tests
+
+4. Switching Tabs: 
+    - common scenario --> new tab opens up from another page [target=_blank]
+    - in Playwright --> when a test script clicks on a link that opens a new tab, it waits to capture this new tab using .waitForEvent('popup'); 
+    - the .waitForEvent('popup') method is always with .click() --> typically done w/ Promise.all()
+        - Promise.all() ==> JS method; returns an array of resolved values from the promises it was waiting for 
+    - SO, once the new tab is opened/captured --> the test script can interact w/ it just like any other page 
+    - Promise.all() + destructing
+        - by using [newPage] --> extracting the first element from this new array 
+
+5. Switiching Back & Forth:
+    - when multiple tabs are open --> treat each tab like an individual Page object by destructuring it 
+    - we can use .bringToFront() method ==> by invoking this on a Page object, you're telling Playwright to make that tab active 
+    - this allows you to easily control/interact w/ diff. tabs by specifying the Page object associated w/ the tab you wish to engage with 
+
+6. Handling Dialogs: 
+    - w/ Cypress --> it automatically accepts alerts, BUT has a difficult time w/ prompt alerts (b/c it can't predict user input)
+        - you'd use ==> cy.on() method [event listener] for normal alerts (not prompt)
+            - EX: cy.on(‘window:alert’ , (str) => { expect(str).to.equal(‘Hello World!) }); 
+        - for prompt alerts ==> .window() & .stub()
+
+    - w/ Playwright --> also uses event listeners (like Cypress)
+        - by default --> alerts are auto-dismissed, SO you don't have to handle them 
+        - even though you don't have to, you can still handle them by using a dialog trigger ==> dialog.accept() OR dialog.dismiss()
+
+        - page.on('dialog') ==> sets up persistent listener(means it will handle every dialog even that occurs after it's been set up)
+            - you set it up once and will forever use the same logic for each dialog that appears --> useful when you know that the same dialog comes up 
+            - when using it in a loop --> adds a new listener for each iteration of the loop 
+            - because of that ==> recommended to just use it ONE TIME 
+
+        - page.once('dialog') ==> does the same thing as page.on(), but automatically removes itself after 1 use 
+
+7. File Download & Upload: 
+    - w/ Cypress --> it's pretty simple; downloads are usually stored in the Cypress/downloads folder 
+        - you'd use cy.readFile() to verify the presence of the download and allow you to read the contents
+        - you'd use cy.selectFile() to simulate the selection of a file/multiple files in an HTML input element (mimics the dragging/dropping)
+        - might need to install the drag & drop plugin to do so 
+
+    - w/ Playwright --> it captures the download event 
+        - can be done by using .waitForEvent('download') --> waits for the downlaod to start and then returns a Download object 
+        - creates a temporary directory to manage download --> can be obtained using download.path()
+        - if you want to keep the downloaded file --> download.saveAs(path)
+
+        - you can select input files using the page.setInputFiles('filePath)
+
+
+Advanced UI Interactions & Challenges: 
+
+- iFrames
+    - html within another html 
+
+- Multiple Tabs 
+- Alerts 
+- File Upload/Download
+- Mouse/Keyboard Actions
+- Tables 
+- Pagination 
+- Forms 
+- Date Inputs 
+
+** INTERVIEW QUESTION: You try to click on element --> what might be the issue? ** 
+    - List off the solutions/scenarios: 
+        1. It might be in an iframe* (they'll ask this in a subtle way)
+        2. You pick a locator that is dynamic 
