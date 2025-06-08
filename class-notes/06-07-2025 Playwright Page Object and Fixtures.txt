@@ -1,0 +1,7 @@
+- Fixtures ==> inital setups for your project 
+    - used to establish the environment for each test, giving the test everything it needs and nothing else 
+
+- What we should do first at a new company  --> setup BasePage and extend into other Pages
+    * Read more about .env file 
+    * Read more about fixtures --> try to implement it in within job's workflow 
+        - helps with efficienvy 

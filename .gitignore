@@ -7,3 +7,6 @@ node_modules/
 /playwright/.cache/
 /junitReports
 .env 
+.DS_store
+/downloads
+**/auth/

@@ -23,7 +23,7 @@ test('Step annotation @Regression', async ({ page }) => {
     });
 
     await test.step('Validate that there are 4 accordians for Instructors', async () => {
-        expect((await page.locator('class^="Accordian_title"').all()).length).toBe(4);
+        expect((await page.locator('[class^="Accordian_title]"').all()).length).toBe(4);
     });
 }); 
 

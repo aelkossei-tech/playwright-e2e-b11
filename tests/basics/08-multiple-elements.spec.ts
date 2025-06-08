@@ -15,7 +15,7 @@ test.describe('Playwright Multiple Elements @Regression', () => {
         const headerElements = page.locator('[class^="Header_menus"]>div');
         expect(await headerElements.count()).toBe(3);
 
-        const expectedHeaderItemTexts = ['Testing', 'Exercise', 'Mock Interviews'];
+        const expectedHeaderItemTexts = ['Testing', 'Exercises', 'Mock Interviews'];
 
         for (let i = 0; i < await headerElements.count(); i++) {
             expect(await headerElements.nth(i).innerText()).toBe(expectedHeaderItemTexts[i]);

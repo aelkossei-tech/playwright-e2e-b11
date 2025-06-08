@@ -1,0 +1,7 @@
+
+
+GlobalSetup
+Run all tests 
+GlobalTeardown 
+
+- Huge advantage of Playwright ==> storing authentication states 
