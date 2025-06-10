@@ -1,0 +1,22 @@
+
+npm init playwright@latest --> to start a new playwright project
+npx playwright install --> install all the browsers
+
+MOST USED: 
+npx playwright test --> runs all tests
+npx playwright codegen --> runs codegen
+npx playwright specName --> runs specific spec file 
+npx playwright show-report --> shows HTML report of spec 
+npx playwright help --> global command that will give you all the available commands you can use in CLI
+
+Attach these tags to npx playwright test: 
+--ui --> run it in UI mode
+-- headless/--headed --> how it should run 
+--project="projectName" 
+--debug 
+--update-snapshots
+--grep "tagName"
+--report="list" 
+--workers 
+
+LATER, you can have these in custom package.json scripts 
