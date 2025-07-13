@@ -1,0 +1,206 @@
+
+Behavior-Driven Development (BDD) ==> framework that behavior specifications are written before the development begins
+    - apparently fosters a more collaborative environment with other Scrum team members 
+    - extends from the Test-Driven Development (TDD) --> shifts the focus from writing tests to defining behaviors 
+    - key feature of BDD --> use of natural, non-techincal language to create test specifications [a type of lingua franca of testing among all Scrum backgrounds]
+    - makes it easier to understand what's going on when it comes to testing 
+        --> ensures that software development is closely aligned w/ business requirements & user expectations
+    - Tools that implement BDD ==> 
+        1. JBehave
+        2. SpecFlow
+        3. Gauge
+        4. Cucumber 
+
+Cucumber ==> an open-source testing framework that facilitates BDD, specifically w/ automated testing of web applications 
+    - w/ Cucumber --> you create tests that are initially crafted in a straightforward, scenario-focused format
+    - these tests precisely describe the system's expected behavior from the USER'S PERSPECTIVE --> makes it suitable for acceptance testing 
+    - developed in Ruby 
+    - uses Gherkin ==> non-technical, human-readable language for writing test cases 
+        - allows individuals w/o a techincal background [BAs & POs] to actively participate in writing/reviewing test scenarios 
+    - composed of 3 primary components: 
+        1. Feature File --> this is where the behaviors are written in Gherkin 
+            - since it's written in Gherkin, it allows for clear/understandable test documnenation 
+            - starts w/ the keyword "Feature" + followed by the concise description of the feature being tested 
+            - so in a Feature File --> there can be multiple scenarios defined 
+                - each of them outline a specific behavior/aspect 
+                - advised to only limit the number of sceanrios to 10 [just to ensure clarity and be able to properly manage them]
+            - these kinds of files have .feature as file extension --> helps indicate that it is a type of file for this purpose 
+            * By using this --> Feature Files are important when bridging the gap 
+
+        2. Step Definitions --> these are the scripts that link the plain language steps (in the Feature File) to the programming code [executing the test steps]
+        3. Test Runner File --> this orchestrates the running of the tests + specifies which Feature Files & scenarios to test  
+
+Gherkin Keywords: 
+    - Feature ==> used to define relevant sceanrios + provide description of a feature
+        - almost like the describe() in Cypress OR test.describe() in Playwright, BUT it's more descriptive 
+        - actually writes out the expected behavior of the feature 
+        - it's the TITLE of a story or what the system should do 
+        - EX: Feature: User Login
+
+    - Background ==> used to define common steps that will be executed BEFORE each scenario in a feature file 
+        - this is basically .beforeEach() --> just states where the user would be in this scenario 
+        - EX: Background: Given the user is on the login page
+
+    - Scenario ==> used to define the actual steps + expected outcomes for a specific test case 
+        - this is our test() block --> w/ the title 
+        - this is a single test case w/ steps 
+        - it's ONE specific situation you want to test 
+        - EX: 
+            Scenario: Successful login
+                When the user enters valid credentials
+                Then they should be redirected to the homepage
+
+    - Scenario Outline ==> used to execute a scenario against multiple sets of data [used w/ Examples]
+        - it's like a template for testing the same scenario w/ different data 
+        - EX: 
+        Scenario Outline: Invalid login
+            When the user logs in with <username> and <password>
+             Then an error message should be shown
+
+            Examples:
+            | username | password |
+            | user1    | wrong1   |
+            | user2    | wrong2   |
+
+    - Examples ==> used to define the test data to be executed by a SINGLE scenario [used w/ Scenario Outline]
+        - a table of test data used w/ Scenario Outline 
+        - a list of values that will be plugged into the scenario 
+
+    - Given ==> sets up a PRECONDITION (something that must be true first)
+        - "Assume that this statement is already true" 
+        - EX: Given the user is logged in
+
+    - When ==> describes an ACTION the user or system performs 
+        - "When I do this..." 
+        - EX: When the user clicks the logout button
+
+    - Then ==> describes the EXPECTED RESULT or OUTCOME 
+        - "Then this should happen..." 
+        - EX: Then the user should see a confirmation message
+
+    - And ==> used to add more steps to Given, When, and Then 
+        - "Also this..."
+        - EX: 
+            Given the user is on the login page  
+            And the username field is empty
+
+    - But ==> used to add an EXCEPTION or CONTRAST to the previous step 
+        - "This happens, but not that..."
+        - EX: 
+            Then the user should see an error message  
+            But the password field should remain hidden
+
+
+Step Definitions ==> serves as a bridge between Gherkin in Feature Files & techincal code that implements these steps 
+    - each Gherkin step in Feature File --> mapped to a corresponding method in Step Definition file (written in programming language, like Java, JS, or C#)
+    - the point/purpose of Step Definitions is to translate Gherkin steps into code you can execute
+
+
+
+
+
+TDD - Test-Driven Development 
+    - it() --> Cypress 
+    - test() --> Playwright
+    
+    1. Write Test Cases - QA 
+    2. Run tests (either manually/automated) [all fail]
+    3. Developer build/deploy their code - Dev 
+    4. The goal is to PASS all the tests w/ deployments (dev code pushes)
+    5. Refractor code (QA or Dev) if any issue raised (failure happens)
+
+    - CLOSEST APPROACH ==> Dev and QA try to complete PBIs/User Stories in the same sprint 
+
+- QA follows 1 sprint behind! [obviously not ideal] --> QA tests sprint-20 PBIs, while Devs are already working on sprint-21
+
+
+BDD - Behavior-Driven Development
+    - This approach is inspired by TDD approach 
+    - They added USER-BEHAVIOR to be visible while hiding the code implementation 
+
+Gherkin Syntax: 
+    - Given --> used for preconditions
+    - When --> Actions 
+    - Then --> Assertions
+
+- Every gherkin-feature file starts w/ a Feature name [Epic name]
+    - Feature: Login Functionality 
+    - Feature: Search Functionality
+    - Feature: Cart Functionality
+    - Feature: Credit Caed Application 
+    - Feature: Member Portal 
+
+    - Scenario (as short as possible): Frontend Testing page is visible OR Frontend Testing verification
+        Given I am on 'website' 
+        When I hover "Testing" menu item 
+        And I click "Frontend Testing" option 
+        Then I see "Frontend Testing" page 
+        And I see 10 practice cards 
+        And I see 10 project cards 
+        When I click on 'HTML Elements' card 
+
+
+** INTERVIEW QUESTION: What's the difference between verification and validation? ** 
+    - Verification* of Software ==> Are we building the product correctly? 
+    - Validation of Software ==> Are we building the right product? 
+
+@Smoke @Frontend 
+Scenario (as short as possible): Frontend Testing page is visible OR Frontend Testing verification
+        Given I am on 'website' 
+        When I hover "Testing" menu item 
+        And I click "Frontend Testing" option 
+        Then I see "Frontend Testing" page 
+        And I see 10 practice cards 
+        And I see 10 project cards 
+        When I click on 'HTML Elements' card 
+
+TDD Approach w/ Playwright: 
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+  await page.goto('https://www.techglobal-training.com/');
+  
+  await page.locator('#dropdown-testing').hover(); 
+  await page.locator('#frontend-option').click();
+
+  await expect(page.locator('#root')).toContainText('Frontend');
+
+    expect(await page.locator('[class^="CardGrids_CardGrids'] a').count()).toBe(10); 
+    expect(await page.locator('[class^="CardGrids_projectContainer'] a').count()).toBe(10); 
+});
+
+BSS Approach w/ Playwright + Cucumber: 
+1. Write Feature File 
+    frontendTesting.feature 
+
+Feature: Frontend Testing Verification
+
+@Smoke @Frontend 
+Scenario (as short as possible): Frontend Testing page is visible OR Frontend Testing verification
+        Given I am on 'website' 
+        When I hover "Testing" menu item 
+        And I click "Frontend Testing" option 
+        Then I see "Frontend Testing" page 
+        And I see 10 practice cards 
+        And I see 10 project cards 
+        When I click on 'HTML Elements' card 
+
+2. Write step defiitions 
+    frontendTestingSteps.js 
+
+    import { Given, When, Then } from '@cucumber/cucumber'
+    import { test, expect } from '@playwright/test';
+
+    Given('I am on {string}' , async function({ page }, url) {
+        await page.goto('https://www.techglobal-training.com/');
+    }); 
+
+    When('I hover {string} menu item', async function({ page }, url) {
+        await page.goto('https://www.techglobal-training.com/');
+    }); 
+
+
+Main Folder Structure: 
+    - Pages 
+    - Features 
+    - Steps 

@@ -1,0 +1,49 @@
+As an SDET --> they'll ALWAYS ask: 
+    1. Tell me your experience with Databases? 
+        - "I interact with databases daily" 
+        - "I'm familar with both Relational (SQL with tables) [MySQL, MicrosoftSQL, etc.] and Non-realtional [MongoDB] databases (stored in data format - like JSON)
+
+     - EX: When you login --> JS waits for event listener [post-request] --> 
+         JSON: 
+            {
+                 "username" : "johndoe@gmail.com"  ==> (converted to a query) --> SELECT * FROM users 
+                 "password" : "1234567890"                                         WHERE username = "johndoe@gmail.com"
+             }                                                                     AND password = "1234567890" 
+
+    2. What are primary keys and foreign keys and what are their differences? Unique Columns? 
+        - Relational DB: Primary Keys vs. Foreign Keys* 
+            - Primary ==> unique identifier for the table; also used to create a relationship with another table 
+            - Foreign ==>  
+            - Unique Columns ==> like usernames, emails, SSN, schoolID, etc. 
+
+    3. They'll give you a model of tables --> joins question (subtle)? 
+        - They'll ask you the relationship between tables and ask how you get certain information 
+        - EX: Find all the customers full name who has pickup orders which has amount more than 100 
+        
+              Customers table --> cust_id, f_name, l_name, order_id 
+              Orders table --> order_id, order_total, delivery_id
+              Delivery table --> delivery_id, delivery_type 
+                                        1     Shipping 
+                                        2     Pick up 
+
+    4. Single and multi-row functions 
+        - Single-row [Aggregate Functions] ==> functions that return single-row queries results 
+            - EX: max, min, 
+        - Multi-rows ==> functions that return multi-row queries results 
+            - EX: upper, substring, round, 
+
+    5. What is DELETE, TRUNCATE vs. DROP (most-dangerous)? 
+        - DELETE --> 
+        - DROP --> completetly gets rid of the table 
+        - TRUNCATE --> deletes all the data, BUT table, columns, rules RMAIN
+
+    - Look into ==> DB Indexing + SQL Injection [not our job, but they want us to at least know what those concepts are]
+
+    6. What is nested query? 
+        - A query within another query 
+
+* Recognize frontend issues & backend issues --> what to categorize 
+* Try to find as much information about the issue before reporting it to the developer (to help specify issue & pinpoints what factors could contribute to the issue)
+
+* NEVER do db testing in Staging or Production environments 
+    - let's figure out which type of environment do we test --> dev? staging? production? 

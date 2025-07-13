@@ -1,0 +1,85 @@
+
+- Decide what you implemented within your project --> CAUSE & EFFECT [what did the company gain from your work]
+- Focus on what you'll SAY in addition to the bullet points in your resume 
+    - If you talk well enough --> then they'll basically NEVER ask you to show you how to do things [like create a framework from scratch]
+    * Focus on your soft skills at this point 
+
+- Questions To Ask Interviewers: 
+    - How would my average sprint look like typically? 
+
+* Watch more videos on all the topics we've covered 
+- Naveen Automation 
+
+- They can ask if a specific device [ATM machine, phone, mug, vending machine, toster, etc.] ==> How would you test this? 
+
+* FIGURE OUT THE FLOW OF YOUR STORY 
+    - Started off with studying in my MLIS - Archive Management focus --> because of this I was comfortable organizing/structuring data 
+      with certain types of data structures/languages [XML, MARC21, RDA, DACS]. I was familiar with SQL and APIs, since we've studied them briefly 
+      in library school. I was always fascinated by xxx. 
+      
+      In fact, during my cataloging courses in my program, we used the application Horizon [by SirsiDynix] to catalog certain items through the GLAM 
+      field. And throughout my expeience with using this application, I noticed a few issues/bugs that would arise when trying input metadata, whether 
+      it was .... . I would notice these defects and try to actually figure out the root of the issue. And because of this I was curious as to how 
+      someone would 
+
+* Ask ChatGPT to go to the applications --> ask to figure out certain bugs that can arise if I were testing it 
+
+
+E2E Testing: 
+    1. User flows [Akin's Verizon exmaple] --> from beginning to end 
+    2. UI-API-DB layers testing --> System Tests, Integration Tests 
+
+UI-API-DB Testing: 
+    How to Test: 
+        - take a snapshot, make sure results are as expected (UI)
+        - add a happy path test case (UI)
+        - then API tests --> Swagger documentation
+            - UI is a refelction of API response body [if there's a problem in UI, the there should be a problem with API]
+            - Swagger & Postmanc --> testing APIs 
+
+
+These 4 are a MUST: 
+** INTERVIEW QUESTION: How do you conduct UI testing? **
+** INTERVIEW QUESTION: How do you conduct API testing? **
+** INTERVIEW QUESTION: How do you conduct DB testing? **
+** INTERVIEW QUESTION: How do you conduct E2E-Integration testing? **
+
+** INTERVIEW QUESTION: How do you conduct Component testing? **
+** INTERVIEW QUESTION: How do you conduct Unit testing? **
+    - Search/learn Jest tool for Unit and Component testing!!
+    - Backend --> NUnit, XUnit for C#
+    - JUnit, TestNG for Java
+    - Pytest for Python
+
+** INTERVIEW QUESTION: How do you conduct Performance testing? **
+    - Read couple articles to learn more about it [why it's needed and when it's conducted (staging environment)]
+    - JMeter, BlazeMeter, LoadRunner, NeoLoad 
+
+** INTERVIEW QUESTION: How do you conduct Accessibiltiy testing? ** [ADD this to resume]
+    - Learn this for sure [easy/fast to learn] and definitely wanted (especially healthcare, etc.) ==> DELTA DENTAL 
+    - Manually: we run it using dev tools
+    - Automation: Playwright has built-in support (though you still need to install dependency: @axe-core/playwright)
+        - .analyze() ==> will scan page you've given & shows you accessibility violations [send to developers to fix those issues]
+        - tells you the impact of each violation [moderate, serious, etc.]
+    - axe Dev Tools (extension on Chrome) ==> can access it in devtools and can scan full page to see the violations
+- Accessibiltiy Testing ==>  Go to every single page on the app and test it with accessibility
+    - QAs should do this as early as possible [5-6 pages deep in]
+    - runs in CI/CD pipeline 
+
+** INTERVIEW QUESTION: How do you conduct Mobile testing? **
+    * Once Playwright releases its mobile testing features --> LEARN IT 
+    * Read few articles about mobile testing to have that in your skilss
+        - Appium documentation (supported with Selenium) --> client-server tool that supports multiple languages (Java, C#, etc.) w/ Selenium
+        - Cloud technologies [all paid, no open source free]: 
+            - BrowserStack* (w/ Playwright)
+            - Perfecto (playwright)
+            - saucelabs(cypress/playwright)
+    - 3 diff types of applications: 
+        - web application --> only runs with browsers
+        - mobile (native) application --> only runs on IOS (AppStore) or Android phones (PlayStore)
+            - IOS: ipa (simulators)
+            - Android: apk (emulators)
+        - hybrid application --> support both web and mobile 
+
+USUALLY NEVER this type of testing: 
+** INTERVIEW QUESTION: How do you conduct Security testing? ** 

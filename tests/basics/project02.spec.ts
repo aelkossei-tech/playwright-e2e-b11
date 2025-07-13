@@ -161,5 +161,7 @@ test.describe('Playwirght Project 02 - Shopping Cart', () => {
 
     // Validate that the cart is empty
     expect(await shoppingCartPage.totalPrice.innerText()).toEqual("Total: $0"); 
+
+    await page.waitForTimeout(3000); 
   }); 
 });

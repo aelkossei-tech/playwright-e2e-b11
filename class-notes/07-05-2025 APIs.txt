@@ -1,0 +1,9 @@
+API (Application Programming Interface)==> allows diff. software applications to communicate w/ each other 
+    - as SDETs --> we'll see the connection between UI and API 
+    - There are a few types of APIs: 
+        1. REST (Represenetational State Transfer)* [we'll be using this most of the time] 
+        2. SOAP (Simple Object )
+        3. GraphQL 
+
+    - How does API work? 
+        - The client sends a request --> server processes the request and sends back a response 
