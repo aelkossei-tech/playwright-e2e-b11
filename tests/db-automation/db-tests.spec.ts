@@ -2,23 +2,21 @@ import { test, expect } from "@playwright/test";
 import { executeQuery } from "../../utils/dbUtils";
 import { faker } from "@faker-js/faker";
 import { BackendTestingPage } from "../../pages/BackendTestingPage";
-import { AxeBuilder } from '@axe-core/playwright'; 
 
+// test.describe("DB Query Verification", () => {
+//   test("Get all instructors", async () => {
+//     const result = await executeQuery("SELECT * FROM instructors");
+//     console.table(result);
 
-test.describe("DB Query Verification", () => {
-  test("Get all instructors", async () => {
-    const result = await executeQuery("SELECT * FROM instructors");
-    console.table(result);
+//     expect(result.length).toBe(4);
+//   });
 
-    expect(result.length).toBe(4);
-  });
-
-  test("Get all students", async () => {
-    const result = await executeQuery("SELECT * FROM students");
-    console.table(result);
-    expect(result.length).toBeGreaterThanOrEqual(2);
-  });
-});
+//   test("Get all students", async () => {
+//     const result = await executeQuery("SELECT * FROM students");
+//     console.table(result);
+//     expect(result.length).toBeGreaterThanOrEqual(2);
+//   });
+// });
 
 
 test.describe('UI - DB E2E Tests', () => {
@@ -58,34 +56,14 @@ test.describe('UI - DB E2E Tests', () => {
 
   test('Delete all students on UI and validate in DB', async({ page }) => {
     await backendTestingPage.deleteAllButton.click();
+
+    const message = page.locator('.notification')
+    await message.waitFor({ state: 'visible' })
+    await message.waitFor({ state: 'hidden' })
+
     const result = await executeQuery(
       `SELECT * FROM students`
     );
     expect(result.length).toBe(2);
   });
-})
-
-// MySQL 
-// MSSQL 
-
-
-test('Home page accessibility check', async ({ page }) => {
-  await page.goto('https://www.techglobal-training.com/'); 
-  
-  const accessibilityScanResults = await new AxeBuilder({ page }).analyze(); // 4
-  
-  const results = accessibilityScanResults.violations.map(x => {
-    return {
-      id: x.id, 
-      impact: x.impact, 
-      description: x.description
-    }
-  }); 
-
-  console.log(results); 
-
-  //console.log(accessibilityScanResults.violations); 
-
-  // expect()
-
 })

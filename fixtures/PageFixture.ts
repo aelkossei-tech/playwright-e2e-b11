@@ -1,16 +1,15 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base, Page } from '@playwright/test';
 import { BasePage } from '../pages/BasePage';
 import { FrontendTestingPage } from '../pages/FrontendTestingPage';
 import { BackendTestingPage } from '../pages/BackendTestingPage';
 import { MockInterviewsLoginPage } from '../pages/MockInterviewsLoginPage';
-import dotenv from 'dotenv';
-dotenv.config();
 
 type PageFixture = {
   basePage: BasePage,
   frontendTestingPage: FrontendTestingPage,
-  backendTestingPage: BackendTestingPage, 
-  mockInterviewsLoginPage: MockInterviewsLoginPage; 
+  backendTestingPage: BackendTestingPage,
+  mockInterviewsLoginPage: MockInterviewsLoginPage,
+  loginPage: Page
 }
 
 export const test = base.extend<PageFixture>({
@@ -35,14 +34,14 @@ export const test = base.extend<PageFixture>({
     await basePage.selectBackendOption();
 
     await use(backendTestingPage);
-  }, 
+  },
 
   mockInterviewsLoginPage: async({ basePage }, use) => {
     const mockInterviewsLoginPage = new MockInterviewsLoginPage(basePage.page);
-    await basePage.mockInterviewsLink.click(); 
+    await basePage.mockInterviewsLink.click();
 
     await use(mockInterviewsLoginPage);
   }
 });
 
-export { expect };
+export { expect } from '@playwright/test';

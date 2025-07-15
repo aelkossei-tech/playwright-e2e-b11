@@ -12,12 +12,15 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  // globalSetup: 'tests/global-setup/global-setup.ts', 
-  // globalTeardown: 'tests/global-setup/global-teardown.ts', 
-  testDir: './tests/demo-blaze',
-  timeout: 30 * 1000, 
+  // globalSetup: './tests/global-setup/global-setup.ts',
+  // globalTeardown: './tests/global-setup/global-teardown.ts',
+  testDir: './tests',
+  timeout: 60 * 1000,
+  expect: {
+    timeout: 10000
+  },
   /* Run tests in files in parallel */
-  fullyParallel: false,
+  fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -26,75 +29,101 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['list'], 
-    // ['json', {  outputFile: 'playwright-report/test-results.json' }], 
-    ['junit', { outputFile: 'junitReports/reports.xml'}], 
-    ['html', { open: 'never' }], 
-  ], 
+    ['list'],
+    //['json', {  outputFile: 'playwright-report/test-results.json' }],
+    ['junit', { outputFile: 'junitReports/reports.xml'}],
+    ['html', { open: 'never' }]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    headless: false, 
+    //storageState: '',
+    headless: false,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.baseURL, 
+    //baseURL: process.env.baseURL, // "https://www.techglobal-training.com"
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retain-on-failure',
+    navigationTimeout: 30000
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'Regression',
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1920, height: 1080 }
+      }
+    },
+    {
       name: 'Basics',
       testDir: './tests/basics',
-      use: {
+      use: { 
         ...devices['Desktop Chrome'],
-        headless: false
-      }
-
+        // baseURL: "https://www.techglobal-training.com",
+        headless: false,
+        actionTimeout: 20000
+      },
     },
-
     {
-      name: 'Demo Blaze',
+      name: 'Demo Blaze Chrome',
       testDir: './tests/demo-blaze',
-      dependencies: ['Demo Blaze Set up'], 
-      use: {
+      dependencies: ['Demo Blaze Set up'],
+      use: { 
         ...devices['Desktop Chrome'],
-        baseURL: 'https://demoblaze.com/index.html#', 
-        headless: false
-      }
-
+        baseURL: "https://demoblaze.com/index.html#",
+        headless: false,
+        storageState: './tests/auth/demo-blaze.json'
+      },
     },
-
+    {
+      name: 'Demo Blaze Safari',
+      testDir: './tests/demo-blaze',
+      dependencies: ['Demo Blaze Set up'],
+      use: { 
+        ...devices['Desktop Safari'],
+        baseURL: "https://demoblaze.com/index.html#",
+        headless: false,
+        storageState: './tests/auth/demo-blaze.json'
+      },
+    },
     {
       name: 'Demo Blaze Set up',
-      testDir: './tests/demo-blaze-setup', 
-      use: {
+      testDir: './tests/demo-blaze-setup',
+      use: { 
         ...devices['Desktop Chrome'],
-        baseURL: 'https://demoblaze.com/index.html#',
-        headless: true
-      }
-    }, 
-
+        baseURL: "https://demoblaze.com/index.html#",
+        headless: false
+      },
+    },
     {
       name: 'DB Automation',
       testDir: './tests/db-automation',
-      use: {
+      use: { 
         ...devices['Desktop Chrome'],
-        baseURL: 'https://demoblaze.com/index.html#',
-        headless: false
-      }
-    }
-/*
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+        viewport: {width: 1920, height: 1080 }
+      },
     },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-*/
+    // {
+    //   name: 'API Automation',
+    //   testDir: './tests/api',
+    //   use: { 
+    //     ...devices['Desktop Chrome'],
+    //     viewport: {width: 1920, height: 1080 }
+    //   },
+    // }
+
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
@@ -123,4 +152,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-

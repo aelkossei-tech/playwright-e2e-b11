@@ -1,0 +1,16 @@
+{
+  "newStudent": {
+    "DOB": "1995-12-23",
+    "EMAIL": "ayah-elkossei.tgschool@gmail.com",
+    "FIRST_NAME": "Ayah",
+    "LAST_NAME": "Elkossei",
+    "INSTRUCTOR_ID": 2
+  },
+  "updatedStudent": {
+    "DOB": "1995-12-23",
+    "EMAIL": "ayah-elkossei.tgschool@gmail.com",
+    "FIRST_NAME": "Ayah",
+    "LAST_NAME": "Elkossei",
+    "INSTRUCTOR_ID": 1
+  }
+}
